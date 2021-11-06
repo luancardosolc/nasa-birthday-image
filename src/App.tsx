@@ -11,6 +11,9 @@ function App() {
       event.preventDefault();
     }
     let result = await EpicAPI.getImage(inputs.birthday);
+    if (!result) {
+      // There's no image for that date, buscar a data mais próxima
+    }
     console.log('result:', result);
   }
 
