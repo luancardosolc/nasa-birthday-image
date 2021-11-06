@@ -11,11 +11,10 @@ function App() {
           When is your birthday?
         </p>
         <form>
-          <label>
-            Name:
-            <input type="text" name="name" />
-          </label>
-          <input type="submit" value="Submit" />
+          <input type="text" name="birthday" placeholder="Type it here" />
+          <br />
+          <br />
+          <input type="submit" value="Get image of my last Birthday" />
         </form>
       </header>
     </div>
