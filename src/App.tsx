@@ -1,6 +1,7 @@
 import React, {useState} from 'react';
 import logo from './giphy.gif';
 import './App.css';
+import EpicAPI from './API';
 
 function App() {
   const [inputs, setInputs] = useState({birthday: ''});
@@ -10,6 +11,7 @@ function App() {
       event.preventDefault();
     }
     console.log('Submit:', inputs);
+    EpicAPI.getImage();
   }
 
   const handleInputChange = (event: { persist: () => void; target: { name: any; value: any; }; }) => {
