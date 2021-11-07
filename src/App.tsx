@@ -5,11 +5,13 @@ import EpicAPI from './API';
 import Modal from './Modal';
 import moment from 'moment';
 import CircularProgress from '@mui/material/CircularProgress';
-import { Button, TextField } from '@mui/material';
+import { Button, TextField, Snackbar, Alert } from '@mui/material';
 
 function App() {
   const [inputs, setInputs] = useState({birthday: ''});
   const [open, setOpen] = useState(false);
+  const [openSnackbar, setOpenSnackbar] = useState(false);
+  const [snackbarMsg, setSnackbarMsg] = useState('');
   const [img, setImg] = useState('');
   const [imgText, setImgText] = useState('');
   const [loading, setLoading] = useState(false);
@@ -29,7 +31,8 @@ function App() {
     let date = moment(dateString);
 
     if (!inputs.birthday || !date.isValid()) {
-      alert('Type a valid date!');
+      setSnackbarMsg('Type a valid date!');
+      setOpenSnackbar(true);
       setLoading(false);
       return;
     }
@@ -83,6 +86,11 @@ function App() {
           </div>
         </form>
         <Modal open={open} setOpen={setOpen} img={img} imgText={imgText} />
+        <Snackbar
+          open={openSnackbar}
+        >
+          <Alert onClose={() => setOpenSnackbar(false)} severity="error">{snackbarMsg}</Alert>
+        </Snackbar>
       </header>
     </div>
   );
