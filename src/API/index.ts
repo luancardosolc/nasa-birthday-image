@@ -11,6 +11,6 @@ export default class EpicAPI {
       const name = item.image + '.png';
       return archive + name;
     }
-		return false;
+		return '';
 	}
 }

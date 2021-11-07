@@ -2,9 +2,12 @@ import React, {useState} from 'react';
 import logo from './giphy.gif';
 import './App.css';
 import EpicAPI from './API';
+import Modal from './Modal';
 
 function App() {
   const [inputs, setInputs] = useState({birthday: ''});
+  const [open, setOpen] = React.useState(false);
+  const [img, setImg] = React.useState('');
 
   const handleSubmit = async (event: { preventDefault: () => void; }) => {
     if (event) {
@@ -15,6 +18,8 @@ function App() {
       // There's no image for that date, buscar a data mais próxima
     }
     console.log('result:', result);
+    setImg(result);
+    setOpen(true);
   }
 
   const handleInputChange = (event: { persist: () => void; target: { name: any; value: any; }; }) => {
@@ -35,6 +40,7 @@ function App() {
           <br />
           <input type="submit" value="Get image of my last Birthday" />
         </form>
+        <Modal open={open} setOpen={setOpen} img={img} />
       </header>
     </div>
   );
