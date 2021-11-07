@@ -15,10 +15,20 @@ function App() {
     if (event) {
       event.preventDefault();
     }
-    const year = moment().year();
+
+    const currentYear = moment().year();
+    const previousYear = moment().subtract(1, 'y').year();
+    const today = moment();
+
     const birthdayArray = inputs.birthday.split('-');
-    let dateString = year + '-' + birthdayArray[1] + '-' + birthdayArray[2];
+    let dateString = currentYear + '-' + birthdayArray[1] + '-' + birthdayArray[2];
     let date = moment(dateString);
+
+    if (date.isSameOrAfter(today, 'day')) {
+      dateString = previousYear + '-' + birthdayArray[1] + '-' + birthdayArray[2];
+      date = moment(dateString);
+    }
+
     let result = await EpicAPI.getImage(dateString);
 
     for (let i = 1; i <= 30; i++) {
@@ -31,7 +41,7 @@ function App() {
     }
     
     setImg(result);
-    setImgText(date.format('YYYY-MM-DD'));
+    setImgText(result ? '- ' + date.format('YYYY-MM-DD') : '');
     setOpen(true);
   }
 

@@ -47,7 +47,7 @@ export default function BasicModal(props: { img: string; imgText: string, setOpe
               <CloseIcon />
           </IconButton>
           <Typography id="modal-modal-title" variant="h6" component="h2">
-            Nasa Birthday Picture - {props.imgText}
+            Nasa Birthday Picture {props.imgText}
           </Typography>
           <Typography id="modal-modal-description" sx={{ mt: 2 }}>
             {props.img ? 
