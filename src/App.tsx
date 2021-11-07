@@ -3,6 +3,7 @@ import logo from './giphy.gif';
 import './App.css';
 import EpicAPI from './API';
 import Modal from './Modal';
+import moment from 'moment';
 
 function App() {
   const [inputs, setInputs] = useState({birthday: ''});
@@ -14,13 +15,22 @@ function App() {
     if (event) {
       event.preventDefault();
     }
-    let result = await EpicAPI.getImage(inputs.birthday);
-    if (!result) {
-      // There's no image for that date, buscar a data mais próxima
+    const year = moment().year();
+    const birthdayArray = inputs.birthday.split('-');
+    let dateString = year + '-' + birthdayArray[1] + '-' + birthdayArray[2];
+    let result = await EpicAPI.getImage(dateString);
+
+    for (let i = 1; i <= 10; i++) {
+      if (result) { break; }
+      if (!result) {
+        // There's no image for that date, search for the closest one
+        let date = moment(dateString).add(i, 'days');
+        result = await EpicAPI.getImage(date.format('YYYY-MM-DD'));
+      }
     }
-    console.log('result:', result);
+    
     setImg(result);
-    setImgText(inputs.birthday);
+    setImgText(dateString);
     setOpen(true);
   }
 
