@@ -8,6 +8,7 @@ function App() {
   const [inputs, setInputs] = useState({birthday: ''});
   const [open, setOpen] = React.useState(false);
   const [img, setImg] = React.useState('');
+  const [imgText, setImgText] = React.useState('');
 
   const handleSubmit = async (event: { preventDefault: () => void; }) => {
     if (event) {
@@ -19,6 +20,7 @@ function App() {
     }
     console.log('result:', result);
     setImg(result);
+    setImgText(inputs.birthday);
     setOpen(true);
   }
 
@@ -31,16 +33,20 @@ function App() {
     <div className="App">
       <header className="App-header">
         <img src={logo} className="App-logo" alt="logo" />
-        <p>
+        <div>
           When is your birthday?
-        </p>
+        </div>
+        <div>
+          If there's no picture for your birthday, we're gonna find a picture for the closest date ;)
+        </div>
+        <br />
         <form onSubmit={handleSubmit}>
           <input type="text" name="birthday" placeholder="YYYY-MM-DD" onChange={handleInputChange} value={inputs.birthday} />
           <br />
           <br />
           <input type="submit" value="Get image of my last Birthday" />
         </form>
-        <Modal open={open} setOpen={setOpen} img={img} />
+        <Modal open={open} setOpen={setOpen} img={img} imgText={imgText} />
       </header>
     </div>
   );

@@ -31,7 +31,7 @@ const styleImg = {
   width: '80%',
 };
 
-export default function BasicModal(props: { img: string; setOpen: (arg0: boolean) => any; open: boolean; }) {
+export default function BasicModal(props: { img: string; imgText: string, setOpen: (arg0: boolean) => any; open: boolean; }) {
   const handleClose = () => props.setOpen(false);
 
   return (
@@ -47,7 +47,7 @@ export default function BasicModal(props: { img: string; setOpen: (arg0: boolean
               <CloseIcon />
           </IconButton>
           <Typography id="modal-modal-title" variant="h6" component="h2">
-            Nasa Birthday Picture
+            Nasa Birthday Picture - {props.imgText}
           </Typography>
           <Typography id="modal-modal-description" sx={{ mt: 2 }}>
             <img src={props.img} alt="" width="85%" style={styleImg}/>
