@@ -28,6 +28,12 @@ function App() {
     let dateString = currentYear + '-' + birthdayArray[1] + '-' + birthdayArray[2];
     let date = moment(dateString);
 
+    if (!inputs.birthday || !date.isValid()) {
+      alert('Type a valid date!');
+      setLoading(false);
+      return;
+    }
+
     if (date.isSameOrAfter(today, 'day')) {
       dateString = previousYear + '-' + birthdayArray[1] + '-' + birthdayArray[2];
       date = moment(dateString);
