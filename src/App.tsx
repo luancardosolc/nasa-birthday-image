@@ -5,6 +5,7 @@ import EpicAPI from './API';
 import Modal from './Modal';
 import moment from 'moment';
 import CircularProgress from '@mui/material/CircularProgress';
+import { Button, TextField } from '@mui/material';
 
 function App() {
   const [inputs, setInputs] = useState({birthday: ''});
@@ -66,12 +67,14 @@ function App() {
         </div>
         <br />
         <form onSubmit={handleSubmit}>
-          <input style={{textAlign: 'center'}} type="text" name="birthday" placeholder="YYYY-MM-DD" onChange={handleInputChange} value={inputs.birthday} />
+          <TextField variant="standard" inputProps={{style: { textAlign: 'center', backgroundColor: 'white' }}} name="birthday" placeholder="YYYY-MM-DD" onChange={handleInputChange} value={inputs.birthday} />
           <br />
           <br />
           {loading ? <CircularProgress /> : ''}
           <br />
-          <input type="submit" value="Get image of my last Birthday" />
+          <div>
+            <Button variant="contained" type="submit">Get image of my last Birthday</Button>
+          </div>
         </form>
         <Modal open={open} setOpen={setOpen} img={img} imgText={imgText} />
       </header>
