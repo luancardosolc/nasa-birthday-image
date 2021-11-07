@@ -18,19 +18,20 @@ function App() {
     const year = moment().year();
     const birthdayArray = inputs.birthday.split('-');
     let dateString = year + '-' + birthdayArray[1] + '-' + birthdayArray[2];
+    let date = moment(dateString);
     let result = await EpicAPI.getImage(dateString);
 
-    for (let i = 1; i <= 10; i++) {
+    for (let i = 1; i <= 30; i++) {
       if (result) { break; }
       if (!result) {
         // There's no image for that date, search for the closest one
-        let date = moment(dateString).add(i, 'days');
+        date = moment(dateString).add(i, 'days');
         result = await EpicAPI.getImage(date.format('YYYY-MM-DD'));
       }
     }
     
     setImg(result);
-    setImgText(dateString);
+    setImgText(date.format('YYYY-MM-DD'));
     setOpen(true);
   }
 

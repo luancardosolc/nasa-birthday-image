@@ -50,7 +50,9 @@ export default function BasicModal(props: { img: string; imgText: string, setOpe
             Nasa Birthday Picture - {props.imgText}
           </Typography>
           <Typography id="modal-modal-description" sx={{ mt: 2 }}>
-            <img src={props.img} alt="" width="85%" style={styleImg}/>
+            {props.img ? 
+              <img src={props.img} alt="" width="85%" style={styleImg}/> : 
+              <p>No image found for your birthday or for the next 30 days.</p>}
           </Typography>
         </Box>
       </Modal>
