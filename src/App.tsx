@@ -4,14 +4,17 @@ import './App.css';
 import EpicAPI from './API';
 import Modal from './Modal';
 import moment from 'moment';
+import CircularProgress from '@mui/material/CircularProgress';
 
 function App() {
   const [inputs, setInputs] = useState({birthday: ''});
-  const [open, setOpen] = React.useState(false);
-  const [img, setImg] = React.useState('');
-  const [imgText, setImgText] = React.useState('');
+  const [open, setOpen] = useState(false);
+  const [img, setImg] = useState('');
+  const [imgText, setImgText] = useState('');
+  const [loading, setLoading] = useState(false);
 
   const handleSubmit = async (event: { preventDefault: () => void; }) => {
+    setLoading(true);
     if (event) {
       event.preventDefault();
     }
@@ -43,6 +46,7 @@ function App() {
     setImg(result);
     setImgText(result ? '- ' + date.format('YYYY-MM-DD') : '');
     setOpen(true);
+    setLoading(false);
   }
 
   const handleInputChange = (event: { persist: () => void; target: { name: any; value: any; }; }) => {
@@ -62,8 +66,10 @@ function App() {
         </div>
         <br />
         <form onSubmit={handleSubmit}>
-          <input type="text" name="birthday" placeholder="YYYY-MM-DD" onChange={handleInputChange} value={inputs.birthday} />
+          <input style={{textAlign: 'center'}} type="text" name="birthday" placeholder="YYYY-MM-DD" onChange={handleInputChange} value={inputs.birthday} />
           <br />
+          <br />
+          {loading ? <CircularProgress /> : ''}
           <br />
           <input type="submit" value="Get image of my last Birthday" />
         </form>
